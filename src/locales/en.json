@@ -1,0 +1,31 @@
+
+  {
+    "language": "en",
+    "welcome": "welcome",
+    "dashboard": "dashboard",
+    "arabic": " arabic",
+    "english": "english",
+    "spanish": "spanish",
+    "admins": "admins",
+    "users": "users",
+    "categories": "categories",
+    "category": "category",
+    "apps": "apps",
+    "auto_update": "Auto Update",
+    "light": "light",
+    "dark": "dark",
+    "night": "night",
+    "coffee": "coffee",
+    "name": "name",
+    "del_msg" : "Are you sure you want to delete this item?",
+    "del_confirm" : "Delete Confirmation",
+    "ok" : "ok",
+    "create" : "Create",
+    "update" : "Update",
+    "page" : "page",
+    "added" : "Successfully added!",
+    "updates" : "Successfully updated!",
+    "deleted" : "Successfully deleted!",
+    "actions": "actions"
+  }
+  

@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    :lang(ar) {
+        .dropdown-end {
+            .dropdown-content {
+                left: 0px !important;
+                right: unset !important;
+            }
+        }
+
+        .avatar-group {
+            &.-space-x-6 {
+                > :not([hidden]) ~ :not([hidden]) {
+                    margin-right: calc(-1.5rem * calc(1 - var(--tw-space-x-reverse)));
+                    margin-left: unset;
+                }
+            }
+        }
+    }
+}
+
+// beautiful website for furniture, ui, ux, ui/ux, website --v 4 --stylize 500

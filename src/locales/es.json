@@ -1,0 +1,33 @@
+
+  {
+    "language": "es",
+    "welcome": "Bienvenido",
+    "dashboard": "tablero",
+    "arabic": "árabe",
+    "english": "inglés",
+    "spanish": "español",
+    "admins": "administradores",
+    "users": "usuarios",
+    "categories": "categorías",
+    "category": "categoría",
+    "apps": "aplicaciones",
+    "auto_update": "auto actualización",
+    "light": "ligero",
+    "dark": "oscuro",
+    "night": "noche",
+    "coffee": "café",
+    "name": "nombre",
+    "del_msg" : "¿Estás seguro de que deseas eliminar este elemento?",
+    "del_confirm" : "Confirmación de eliminación",
+    "ok" : "ok",
+    "create" : "crear",
+    "update" : "actualizar",
+    "page" : "página",
+    "added" : "Añadido con éxito!",
+    "updates" : "Actualizado exitosamente!",
+    "deleted" : "Eliminado con éxito!",
+    "actions": "comportamiento"
+  }
+  
+
+
