@@ -2,7 +2,15 @@
   <div class="drawer drawer-mobile">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
     <div
-      class="drawer-content flex flex-col items-center justify-start shadow-layout lg:mx-2 mx-0"
+      class="
+        drawer-content
+        flex flex-col
+        items-center
+        justify-start
+        shadow-layout
+        lg:mx-2
+        mx-0
+      "
     >
       <Navbar
         class="rounded-box z-30 shadow-[rgba(99,99,99,0.2)_0px_0px_12px_0px]"
@@ -18,7 +26,7 @@
           </label>
         </template>
       </Navbar>
-      <section class="container mx-auto px-4 pt-2">
+      <section class="sm:container w-full mx-0 sm:mx-auto px-4 pt-2">
         <router-view></router-view>
       </section>
     </div>

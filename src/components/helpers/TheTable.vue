@@ -1,7 +1,7 @@
 <template>
   <section class="mt-10">
-    <div class="flex justify-between mb-5">
-      <div class="form-control">
+    <div class="flex justify-between items-center sm:flex-row flex-col mb-5">
+      <div class="form-control mb-3">
         <div class="input-group">
           <input
             type="text"
@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <label for="my-modal-5" class="btn gap-2">
+      <label for="my-modal-5" class="btn gap-2 z-0">
         <fa-icon :icon="['far', 'square-plus']" class="fa-xl" />
         {{ $t("create") }}
       </label>
