@@ -14,8 +14,19 @@
         <h3 class="font-bold text-lg mb-5 capitalize">{{ title }}</h3>
         <slot name="content" />
         <div class="modal-action">
-          <label :for="id" class="btn gap-2" @click="$emit('ok')">
-            {{ ok }}
+          <label
+            :for="id"
+            class="btn gap-2"
+            :class="{ loading: loading }"
+            @click="$emit('ok')"
+          >
+            <span v-if="progress">
+              {{ Math.ceil(progress) + "" + "%" || null }}
+              {{ $t("loading") }}
+            </span>
+            <span v-else>
+              {{ ok }}
+            </span>
           </label>
         </div>
       </div>
@@ -32,6 +43,14 @@ const props = defineProps({
   title: {
     type: String,
     default: null,
+  },
+  progress: {
+    type: Number,
+    default: null,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
   },
   width: {
     type: String,

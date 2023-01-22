@@ -33,6 +33,7 @@
     "added" : "Añadido con éxito!",
     "updates" : "Actualizado exitosamente!",
     "deleted" : "Eliminado con éxito!",
+    "loading" : "cargando...",
     "actions": "comportamiento"
   }
   

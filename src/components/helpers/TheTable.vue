@@ -29,6 +29,8 @@
         width="w-11/12 max-w-5xl"
         :title="`${$t('create')} ${title}`"
         :ok="$t('create')"
+        :loading="dataTable.loading"
+        :progress="dataTable.progress"
         @ok="addDocument"
       >
         <template #content>

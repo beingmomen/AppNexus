@@ -86,6 +86,10 @@ const fieldValue = computed({
 });
 
 const file = async () => {
+  store.commit(`${props.moduleName}/setTableValue`, {
+    key: "loading",
+    value: true,
+  });
   let file = await fileInput.value.files[0];
   fetchImgUrl(file);
   let formData = await new FormData();
@@ -112,7 +116,10 @@ const fetchImgUrl = async (file) => {
           console.warn("Upload is paused");
           break;
         case "running":
-          console.warn("Upload is running");
+          store.commit(`${props.moduleName}/setTableValue`, {
+            key: "progress",
+            value: progress,
+          });
           break;
       }
     },
@@ -123,6 +130,14 @@ const fetchImgUrl = async (file) => {
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         // console.warn("File available at", downloadURL);
         fieldValue.value = downloadURL;
+        store.commit(`${props.moduleName}/setTableValue`, {
+          key: "loading",
+          value: false,
+        });
+        store.commit(`${props.moduleName}/setTableValue`, {
+          key: "progress",
+          value: 0,
+        });
       });
     }
   );

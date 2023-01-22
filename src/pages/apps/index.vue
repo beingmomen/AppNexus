@@ -54,6 +54,7 @@
           store-key="images"
           :multiple="true"
           :module-name="moduleName"
+          storage-path="apps/images/"
         />
       </form>
     </template>

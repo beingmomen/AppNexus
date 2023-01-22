@@ -13,6 +13,8 @@ export default {
         filters: [],
         search: null,
         page: null,
+        loading: false,
+        progress: 0,
       },
       fields: {
         name: null,

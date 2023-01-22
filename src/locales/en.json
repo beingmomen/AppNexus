@@ -33,6 +33,7 @@
     "added" : "Successfully added!",
     "updates" : "Successfully updated!",
     "deleted" : "Successfully deleted!",
+    "loading" : "loading...",
     "actions": "actions"
   }
   

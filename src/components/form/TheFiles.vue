@@ -33,6 +33,12 @@
 </template>
 
 <script setup>
+import {
+  storage,
+  uploadBytesResumable,
+  getDownloadURL,
+  storageRef,
+} from "@/plugins/firebase.js";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
@@ -63,6 +69,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  storagePath: {
+    type: String,
+    default: null,
+  },
 });
 
 const fieldValue = computed({
@@ -83,6 +93,7 @@ const fieldValue = computed({
 
 const file = async () => {
   let files = await filesInput.value.files;
+
   let filesArray = [];
   const arr = [];
 
@@ -99,8 +110,77 @@ const file = async () => {
       src: URL.createObjectURL(file),
     });
   }
+  fetchImgsUrl(filesArray);
   filesSrc.value = arr;
-  fieldValue.value = filesArray;
+  // fieldValue.value = filesArray;
+};
+
+const fetchImgsUrl = async (files) => {
+  store.commit(`${props.moduleName}/setTableValue`, {
+    key: "loading",
+    value: true,
+  });
+  let completedUploads = 0;
+
+  const promises = [];
+
+  files.forEach((file) => {
+    // Create a reference to the location in Firebase Storage where the file will be uploaded
+    const storageReference = storageRef(storage, props.storagePath + file.name);
+    // Upload the file and metadata
+    const uploadTask = uploadBytesResumable(storageReference, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.warn("Upload is " + progress + "% done");
+        console.warn("snapshot.state ", snapshot.state);
+        switch (snapshot.state) {
+          case "paused":
+            // console.warn("Upload is paused");
+            break;
+          case "running":
+            // console.warn("Upload is running");
+            store.commit(`${props.moduleName}/setTableValue`, {
+              key: "progress",
+              value: progress,
+            });
+            break;
+        }
+      },
+      (error) => {
+        console.warn("error", error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          completedUploads++;
+          promises.push(downloadURL);
+          if (completedUploads === files.length) {
+            console.log("All uploads have been completed!");
+            store.commit(`${props.moduleName}/setTableValue`, {
+              key: "loading",
+              value: false,
+            });
+            store.commit(`${props.moduleName}/setTableValue`, {
+              key: "progress",
+              value: 0,
+            });
+          }
+          // console.warn("File available at", downloadURL);
+        });
+      }
+    );
+    // promises.push(uploadTask);
+    fieldValue.value = promises;
+  });
+
+  // Promise.all(promises).then(() => {
+  //   // All files have been uploaded
+  //   promises.forEach((promise) => {
+  //     console.warn("All files have been uploaded", promise);
+  //   });
+  // });
 };
 </script>
 
