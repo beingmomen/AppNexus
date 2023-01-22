@@ -7,11 +7,13 @@ import rootGetters from "./utils/getters";
 // Import Modules
 import auth from "./modules/auth/index";
 import categories from "./modules/categories/index";
+import apps from "./modules/apps/index";
 
 const store = createStore({
   modules: {
     auth,
     categories,
+    apps,
   },
   state() {
     return {};

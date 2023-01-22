@@ -11,6 +11,9 @@ import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
 import TheTable from "./components/helpers/TheTable.vue";
 import TheModal from "./components/helpers/TheModal.vue";
 import TheInput from "./components/form/TheInput.vue";
+import TheFile from "./components/form/TheFile.vue";
+import TheFiles from "./components/form/TheFiles.vue";
+import TheSelect from "./components/form/TheSelect.vue";
 
 // Import CSS
 import "./index.scss";
@@ -34,6 +37,9 @@ app.component(fontawesome.fontIcon, fontawesome.FontAwesomeIcon);
 app.component("Modal", TheModal);
 app.component("Table", TheTable);
 app.component("Input", TheInput);
+app.component("File", TheFile);
+app.component("Files", TheFiles);
+app.component("Select", TheSelect);
 app.component("pagination", VueTailwindPagination);
 
 app.mount("#app");

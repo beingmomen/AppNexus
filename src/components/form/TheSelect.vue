@@ -2,12 +2,11 @@
   <div class="form-control mb-4">
     <label class="input-group input-group-vertical">
       <span class="capitalize">{{ label }}</span>
-      <input
-        v-model="fieldValue"
-        :placeholder="label"
-        :type="type"
-        class="input input-bordered w-full"
-      />
+      <select class="select select-bordered w-full">
+        <option disabled selected>Who shot first?</option>
+        <option>Han Solo</option>
+        <option>Greedo</option>
+      </select>
     </label>
   </div>
 </template>

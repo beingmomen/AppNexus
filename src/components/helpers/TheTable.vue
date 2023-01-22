@@ -27,7 +27,7 @@
       <Modal
         id="my-modal-5"
         width="w-11/12 max-w-5xl"
-        :title="`${$t('create')} ${$t('category')}`"
+        :title="`${$t('create')} ${title}`"
         :ok="$t('create')"
         @ok="addDocument"
       >
@@ -84,7 +84,7 @@
             <Modal
               :id="`patch-${row.id}`"
               width="w-11/12 max-w-5xl"
-              :title="`${$t('update')} ${$t('category')}`"
+              :title="`${$t('update')} ${title}`"
               :ok="$t('update')"
               @ok="updateDocument(row.id)"
               @closeModal="closeModal"
@@ -137,6 +137,10 @@ const {
 } = useFirebase(props.moduleName);
 const store = useStore();
 const props = defineProps({
+  title: {
+    type: String,
+    default: null,
+  },
   cols: {
     type: Array,
     default: null,

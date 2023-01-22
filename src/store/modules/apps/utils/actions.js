@@ -6,6 +6,7 @@ export default {
     const extract = Object.keys(state.fields);
     const extractedData = extract.map((key) => ({ [key]: payload[key] }));
     const result = Object.assign({}, ...extractedData);
+
     for (const [key, value] of Object.entries(result)) {
       commit("setFieldValue", { key, value });
     }
