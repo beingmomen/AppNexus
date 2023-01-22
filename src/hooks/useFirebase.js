@@ -18,6 +18,7 @@ import {
   endBefore,
   limit,
   limitToLast,
+  where,
   onSnapshot,
 } from "firebase/firestore";
 
@@ -67,7 +68,7 @@ export default (collectionName) => {
     dispatchData(q);
   };
 
-  const fetchDataByQuery = async (dir, rows = 10) => {
+  const fetchDataByQuery = async (dir, text, rows = 10) => {
     let q = await null;
     if (dir === "next") {
       if (!visible.lastDoc) return;
@@ -77,7 +78,7 @@ export default (collectionName) => {
         limit(rows),
         startAfter(visible.lastDoc)
       );
-    } else {
+    } else if (dir === "back") {
       if (!visible.firstDoc) return;
       q = await query(
         col,
@@ -85,6 +86,17 @@ export default (collectionName) => {
         limitToLast(rows),
         endBefore(visible.firstDoc)
       );
+    } else if (dir === "search") {
+      if (!text) return;
+      q = await query(
+        col,
+        orderBy("timestamp"),
+        limit(rows),
+        where("name", "==", text)
+      );
+    } else if (dir === "resetSearch") {
+      if (text) return;
+      q = await query(col, orderBy("timestamp"), limit(rows));
     }
 
     await dispatchData(q);

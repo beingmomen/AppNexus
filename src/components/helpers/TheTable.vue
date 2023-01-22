@@ -4,11 +4,16 @@
       <div class="form-control mb-3">
         <div class="input-group">
           <input
+            v-model="searchText"
             type="text"
             placeholder="Search…"
             class="input input-bordered"
+            @input="fetchDataByQuery('resetSearch', searchText)"
           />
-          <button class="btn btn-square">
+          <button
+            class="btn btn-square"
+            @click="fetchDataByQuery('search', searchText)"
+          >
             <fa-icon :icon="['fas', 'magnifying-glass']" class="fa-xl" />
           </button>
         </div>
@@ -53,13 +58,13 @@
               >
                 <fa-icon
                   :icon="['fas', 'pen-to-square']"
-                  class="fa-xl mx-2 text-info-content"
+                  class="fa-xl mx-2 text-sky-700"
                 />
               </label>
               <label :for="`del-${row.id}`" class="cursor-pointer">
                 <fa-icon
                   :icon="['fas', 'trash-can']"
-                  class="fa-xl mx-2 text-error"
+                  class="fa-xl mx-2 text-rose-700"
                 />
               </label>
             </td>
@@ -143,6 +148,7 @@ const props = defineProps({
 });
 
 let currentPage = ref(1);
+let searchText = ref();
 let disabledBtn = ref(false);
 
 const dataTable = computed(() => {

@@ -91,7 +91,15 @@
 
         <ul
           tabindex="0"
-          class="dropdown-content menu p-2 shadow-lg rounded-box w-48"
+          class="
+            dropdown-content
+            menu
+            p-2
+            shadow-lg
+            bg-base-100
+            rounded-box
+            w-48
+          "
         >
           <li
             v-for="(lang, i) in languages"
