@@ -1,5 +1,8 @@
 import axios from "axios";
 import router from "@/router/index";
+import { db } from "@/plugins/firebase.js";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
 const API_KEY = "AIzaSyC7AEfVGbRgXcGr1Xt8J5qu5yfy46st8Nk";
 const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const UPDATE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
@@ -20,7 +23,7 @@ export default {
     }
   },
 
-  async updateUser({ commit }, payload) {
+  async updateUser({ commit, dispatch }, payload) {
     try {
       const { data, status } = await axios.post(UPDATE_URL, {
         ...payload,
@@ -29,13 +32,28 @@ export default {
 
       if (status === 200) {
         commit("user", data);
+        dispatch("storeUser", data);
       }
     } catch (error) {
       // console.warn("Error updating user:", error);
     }
   },
 
-  async currentUser({ commit, dispatch }, payload) {
+  async storeUser({ commit }, payload) {
+    const data = {
+      name: payload.displayName,
+      email: payload.email,
+      emailVerified: payload.emailVerified,
+      image: payload.photoUrl,
+    };
+
+    await addDoc(collection(db, "admins"), {
+      ...data,
+      timestamp: serverTimestamp(),
+    });
+  },
+
+  async currentUser({ commit }, payload) {
     if (!payload) return;
     try {
       const {

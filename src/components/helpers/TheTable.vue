@@ -6,7 +6,7 @@
           <input
             v-model="searchText"
             type="text"
-            placeholder="Search…"
+            :placeholder="$t('search')"
             class="input input-bordered"
             @input="fetchDataByQuery('resetSearch', searchText)"
           />
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <label for="my-modal-5" class="btn gap-2 z-0">
+      <label v-if="action" for="my-modal-5" class="btn gap-2 z-0">
         <fa-icon :icon="['far', 'square-plus']" class="fa-xl" />
         {{ $t("create") }}
       </label>
@@ -45,14 +45,14 @@
         <thead>
           <tr>
             <th v-for="{ key, name } in cols" :key="key">{{ name }}</th>
-            <th>{{ $t("actions") }}</th>
+            <th v-if="action">{{ $t("actions") }}</th>
           </tr>
         </thead>
         <tbody>
           <!-- row 1 -->
           <tr v-for="row in dataTable.allData" :key="row.id">
             <td v-for="{ key } in cols" :key="key">
-              <div v-if="key == 'logo'" class="avatar">
+              <div v-if="key == 'logo' || key == 'image'" class="avatar">
                 <div class="w-12 rounded-full">
                   <img :src="row[key]" />
                 </div>
@@ -62,7 +62,7 @@
               </span>
               <span v-else>{{ row[key] }}</span>
             </td>
-            <td>
+            <td v-if="action">
               <label
                 :for="`patch-${row.id}`"
                 class="cursor-pointer"
@@ -119,7 +119,9 @@
             «
           </button>
           <button class="btn">
-            {{ dataTable.totalItems }} | {{ $t("page") }} {{ currentPage }}
+            <!-- {{ dataTable.totalItems }} | -->
+
+            {{ $t("page") }} {{ currentPage }}
           </button>
           <button
             :disabled="disabledBtn"
@@ -163,6 +165,10 @@ const props = defineProps({
   moduleName: {
     type: String,
     default: null,
+  },
+  action: {
+    type: Boolean,
+    default: true,
   },
 });
 

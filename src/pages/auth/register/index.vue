@@ -54,7 +54,7 @@
           </div>
           <label class="label justify-center">
             <router-link to="/auth/login" class="label-text-alt link link-hover"
-              >Login Insted</router-link
+              >Login Instead</router-link
             >
           </label>
         </div>

@@ -154,13 +154,13 @@
             w-52
           "
         >
-          <li>
+          <!-- <li>
             <a class="justify-between">
               Profile
               <span class="badge">New</span>
             </a>
           </li>
-          <li><a>Settings</a></li>
+          <li><a>Settings</a></li> -->
           <li @click="logout"><a>Logout</a></li>
         </ul>
       </div>
