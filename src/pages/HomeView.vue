@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-start mt-12 h-screen">
+  <div class="flex justify-center items-start mt-12 h-auto">
     <div class="stats stats-vertical-custom shadow">
       <div class="stat">
         <div class="stat-figure text-primary">
