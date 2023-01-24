@@ -68,6 +68,18 @@ export default (collectionName) => {
     dispatchData(q);
   };
 
+  const fetchDataGlobal = async (colName) => {
+    const col = collection(db, colName);
+    const q = await query(col, orderBy("timestamp"));
+    await onSnapshot(q, async ({ docs }) => {
+      const data = await docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      await store.dispatch("global/fetchData", { data, colName });
+    });
+  };
+
   const fetchDataByQuery = async (dir, text, rows = 10) => {
     let q = await null;
     if (dir === "next") {
@@ -102,10 +114,8 @@ export default (collectionName) => {
     await dispatchData(q);
   };
 
-  const fetchDocument = async (id) => {
-    const docRef = doc(db, collectionName, id);
-    const docSnap = await getDoc(docRef);
-    store.dispatch(`${collectionName}/showSingleData`, docSnap.data());
+  const fetchDocument = async (data) => {
+    store.dispatch(`${collectionName}/showSingleData`, data);
   };
 
   const addDocument = async () => {
@@ -129,6 +139,7 @@ export default (collectionName) => {
   const deleteDocument = async (id) => {
     let first = dataTable.value.totalItems.toString().match(/\d$/);
     await deleteDoc(doc(db, collectionName, id));
+    toast.success(t("deleted"));
     fetchCount();
     if (first == 1) {
       fetchDataByQuery("back");
@@ -137,10 +148,14 @@ export default (collectionName) => {
 
   return {
     fetchData,
+    fetchDataGlobal,
     fetchDataByQuery,
     fetchDocument,
     addDocument,
     updateDocument,
     deleteDocument,
+    getDoc,
+    doc,
+    db,
   };
 };

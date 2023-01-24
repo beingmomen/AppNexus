@@ -4,18 +4,35 @@
       <span class="capitalize w-full h-10 pr-0 justify-between">
         {{ label }}
       </span>
-      <div v-show="image" class="avatar absolute right-0 bottom-0">
+      <div
+        v-if="fieldValue"
+        v-show="image"
+        class="avatar absolute right-0 bottom-0"
+      >
+        <div
+          v-for="(img, i) in fieldValue"
+          :key="i"
+          class="w-10 ml-2 rounded-[50%]"
+        >
+          <img loading="lazy" class="rounded-img" :src="img" />
+        </div>
+      </div>
+      <div v-else v-show="image" class="avatar absolute right-0 bottom-0">
         <div
           v-for="img in filesSrc"
           :key="img.name"
           class="w-10 ml-2 rounded-[50%]"
         >
-          <img class="rounded-img" :src="img.src" />
+          <img loading="lazy" class="rounded-img" :src="img.src" />
         </div>
       </div>
       <div v-if="!filesSrc" class="avatar absolute right-0 bottom-0">
         <div class="w-10 ml-2 rounded-[50%]">
-          <img class="rounded-img" src="/src/assets/images/logo.png" />
+          <img
+            loading="lazy"
+            class="rounded-img"
+            src="/src/assets/images/logo.png"
+          />
         </div>
       </div>
     </label>
@@ -167,20 +184,12 @@ const fetchImgsUrl = async (files) => {
               value: 0,
             });
           }
-          // console.warn("File available at", downloadURL);
         });
       }
     );
-    // promises.push(uploadTask);
+
     fieldValue.value = promises;
   });
-
-  // Promise.all(promises).then(() => {
-  //   // All files have been uploaded
-  //   promises.forEach((promise) => {
-  //     console.warn("All files have been uploaded", promise);
-  //   });
-  // });
 };
 </script>
 

@@ -59,7 +59,6 @@ const routes = computed(() => {
     { name: t("admins"), route: "/admins", icon: "user" },
     { name: t("categories"), route: "/categories", icon: "list" },
     { name: t("apps"), route: "/apps", icon: "robot" },
-    { name: t("auto_update"), route: "/auto-update", icon: "wrench" },
   ];
 
   return routes;

@@ -51,12 +51,22 @@
         <tbody>
           <!-- row 1 -->
           <tr v-for="row in dataTable.allData" :key="row.id">
-            <td v-for="{ key } in cols" :key="key">{{ row[key] }}</td>
+            <td v-for="{ key } in cols" :key="key">
+              <div v-if="key == 'logo'" class="avatar">
+                <div class="w-12 rounded-full">
+                  <img :src="row[key]" />
+                </div>
+              </div>
+              <span v-else-if="key == 'category'">
+                {{ categoryFormat(row[key]) }}
+              </span>
+              <span v-else>{{ row[key] }}</span>
+            </td>
             <td>
               <label
                 :for="`patch-${row.id}`"
                 class="cursor-pointer"
-                @click="fetchDocument(row.id)"
+                @click="fetchDocument(row)"
               >
                 <fa-icon
                   :icon="['fas', 'pen-to-square']"
@@ -126,7 +136,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watch } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
 import useFirebase from "@/hooks/useFirebase";
 import { useStore } from "vuex";
 const {
@@ -136,6 +146,9 @@ const {
   addDocument,
   updateDocument,
   deleteDocument,
+  getDoc,
+  doc,
+  db,
 } = useFirebase(props.moduleName);
 const store = useStore();
 const props = defineProps({
@@ -173,13 +186,11 @@ const changePage = async (dir) => {
   }, 1000);
 };
 
-const ok = async ({ action, id }) => {
-  dispatchAction(`${props.moduleName}/${action}`, id);
-};
-
 const closeModal = () => {
   store.dispatch(`${props.moduleName}/resetFields`);
 };
 </script>
+
+
 
 <style lang="scss" scoped></style>

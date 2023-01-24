@@ -4,7 +4,6 @@
       <span class="capitalize">{{ label }}</span>
       <input
         v-model="fieldValue"
-        :placeholder="label"
         :type="type"
         class="input input-bordered w-full"
       />

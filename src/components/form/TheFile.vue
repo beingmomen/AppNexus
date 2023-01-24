@@ -7,8 +7,17 @@
       <div v-show="image" class="avatar absolute right-0 bottom-0">
         <div class="w-10 rounded-[50%]">
           <img
+            loading="lazy"
+            v-if="fieldValue"
             class="rounded-img"
-            :src="src || '/src/assets/images/logo.png'"
+            :src="fieldValue"
+          />
+          <img loading="lazy" v-else-if="src" class="rounded-img" :src="src" />
+          <img
+            loading="lazy"
+            v-else
+            class="rounded-img"
+            src="@/assets/images/logo.png"
           />
         </div>
       </div>
@@ -17,7 +26,6 @@
     <input
       type="file"
       class="file-input file-input-bordered w-full"
-      :placeholder="label"
       ref="fileInput"
       :multiple="multiple"
       :accept="accept"
@@ -77,7 +85,6 @@ const fieldValue = computed({
   },
   // setter
   set(val) {
-    console.warn("val", val);
     store.commit(`${props.moduleName}/setFieldValue`, {
       key: props.storeKey,
       value: val,
@@ -110,10 +117,10 @@ const fetchImgUrl = async (file) => {
     "state_changed",
     (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.warn("Upload is " + progress + "% done");
+      // console.warn("Upload is " + progress + "% done");
       switch (snapshot.state) {
         case "paused":
-          console.warn("Upload is paused");
+          // console.warn("Upload is paused");
           break;
         case "running":
           store.commit(`${props.moduleName}/setTableValue`, {
