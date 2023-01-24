@@ -5,13 +5,13 @@
         <div class="input-group">
           <input
             v-model="searchText"
-            type="text"
+            type="text "
             :placeholder="$t('search')"
-            class="input input-bordered"
+            class="input input-bordered border-radius-start"
             @input="fetchDataByQuery('resetSearch', searchText)"
           />
           <button
-            class="btn btn-square"
+            class="btn btn-square border-radius-end"
             @click="fetchDataByQuery('search', searchText)"
           >
             <fa-icon :icon="['fas', 'magnifying-glass']" class="fa-xl" />
@@ -116,7 +116,7 @@
         <div class="btn-group">
           <button
             :disabled="disabledBtn"
-            class="btn"
+            class="btn border-radius-start"
             :class="{ 'btn-disabled': currentPage <= 1 }"
             @click="changePage('back'), currentPage--"
           >
@@ -129,7 +129,7 @@
           </button>
           <button
             :disabled="disabledBtn"
-            class="btn"
+            class="btn border-radius-end"
             :class="{ 'btn-disabled': currentPage >= dataTable.totalPages }"
             @click="changePage('next'), currentPage++"
           >

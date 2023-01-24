@@ -3,12 +3,35 @@
 @tailwind utilities;
 
 @layer components {
+    .border-radius-start {
+        border-start-start-radius: var(--rounded-btn, 0.5rem) !important;
+        border-end-start-radius: var(--rounded-btn, 0.5rem) !important;
+        border-end-end-radius: 0 !important;
+        border-start-end-radius: 0 !important;
+    }
+    .border-radius-end {
+        border-start-start-radius: 0 !important;
+        border-end-start-radius: 0 !important;
+        border-end-end-radius: var(--rounded-btn, 0.5rem) !important;
+        border-start-end-radius: var(--rounded-btn, 0.5rem) !important;
+    }
+
     :lang(ar) {
         .dropdown-end {
             .dropdown-content {
                 left: 0px !important;
                 right: unset !important;
             }
+        }
+
+        .right-2 {
+            right: unset;
+            left: 0.5rem;
+        }
+
+        .right-0 {
+            right: unset;
+            left: 0;
         }
 
         .avatar-group {
@@ -19,6 +42,25 @@
                 }
             }
         }
+
+        .table :where(th, td) {
+            text-align: right;
+        }
+
+        .table :where(.table *:first-child) :where(*:first-child) :where(th, td):first-child {
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0;
+        }
+
+        :where(.table *:first-child) :where(*:first-child) :where(th, td):last-child {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0;
+        }
+    }
+}
+
+@layer utilities {
+    :lang(ar) {
     }
 }
 

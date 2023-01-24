@@ -22,16 +22,16 @@ const moduleName = "admins";
 const tableHeader = computed(() => {
   const header = [
     {
+      key: "image",
+      name: t("image"),
+    },
+    {
       key: "name",
       name: t("name"),
     },
     {
       key: "email",
       name: t("email"),
-    },
-    {
-      key: "image",
-      name: t("image"),
     },
   ];
   return header;

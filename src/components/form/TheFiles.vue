@@ -1,7 +1,7 @@
 <template>
   <div class="form-control mb-4">
     <label class="input-group input-group-vertical relative">
-      <span class="capitalize w-full h-10 pr-0 justify-between">
+      <span class="capitalize w-full h-10 justify-between">
         {{ label }}
       </span>
       <div
@@ -38,6 +38,7 @@
     </label>
 
     <input
+      dir="ltr"
       type="file"
       class="file-input file-input-bordered w-full"
       :placeholder="label"

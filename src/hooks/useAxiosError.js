@@ -11,11 +11,12 @@ export default () => {
   const handleError = (e) => {
     // Do some action here, for example, logging the error to the console
     const msg = e.response.data.error.message;
-    toast.error(msg);
 
     if (msg === "INVALID_ID_TOKEN") {
       store.dispatch("auth/logout");
+      return;
     }
+    toast.error(msg);
     error.value = e;
     return Promise.reject(e);
   };
