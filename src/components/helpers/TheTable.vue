@@ -19,7 +19,11 @@
         </div>
       </div>
 
-      <label v-if="action" for="my-modal-5" class="btn gap-2 z-0">
+      <label
+        v-if="action"
+        for="my-modal-5"
+        class="btn gap-2 z-0 bg-primary-focus hover:bg-primary border-0"
+      >
         <fa-icon :icon="['far', 'square-plus']" class="fa-xl" />
         {{ $t("create") }}
       </label>

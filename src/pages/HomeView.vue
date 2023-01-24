@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center items-start mt-12 h-screen">
-    <div class="stats shadow">
+    <div class="stats stats-vertical-custom shadow">
       <div class="stat">
         <div class="stat-figure text-primary">
           <fa-icon :icon="['fas', 'user']" class="fa-xl" />
@@ -45,3 +45,12 @@ const allCollectionsCount = () => {
 };
 allCollectionsCount();
 </script>
+
+
+<style lang="scss" scoped>
+.stats-vertical-custom {
+  @media (max-width: 576px) {
+    grid-auto-flow: row;
+  }
+}
+</style>

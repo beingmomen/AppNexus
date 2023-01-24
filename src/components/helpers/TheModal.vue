@@ -16,7 +16,7 @@
         <div class="modal-action">
           <label
             :for="id"
-            class="btn gap-2"
+            class="btn gap-2 bg-primary-focus hover:bg-primary border-0"
             :class="{ loading: loading }"
             @click="$emit('ok')"
           >
