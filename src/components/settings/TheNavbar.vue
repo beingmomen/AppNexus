@@ -169,6 +169,7 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import useThemes from "../../hooks/useThemes.js";
 import useI18n from "../../hooks/useI18n.js";
 import { useStore } from "vuex";
@@ -179,6 +180,10 @@ const store = useStore();
 const logout = () => {
   store.dispatch("auth/logout");
 };
+
+const url = computed(() => {
+  return store.getters["auth/user/imageUrl"];
+});
 </script>
 
 <style lang="scss" scoped>
